@@ -1,5 +1,5 @@
 import Employee from './components/Employee';
-import './App.css';
+import './index.css';
 import {useState} from 'react'
 
 
