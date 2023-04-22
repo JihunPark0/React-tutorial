@@ -1,7 +1,7 @@
 import Employee from './components/Employee';
 import './index.css';
-import {useState} from 'react'
-
+import {useState} from 'react';
+import {v4 as uuidv4} from 'uuid';
 
 function App() {
 //there are other hooks that we can use to introduce functionality into our components very easily
@@ -17,19 +17,23 @@ const [role, setRole] = useState('Developer');//example of using useState [varia
 //there are other hooks that we can use to introduce functionality into our components very easily
 //usually hooks are prefixed with 'use'
 
+const [employees, setEmployees] = useState(
+  [
+    {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
+    {name:"Daniel Zaz", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
+    {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
+    {name:"Daniel Zaz", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
+    {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
+    {name:"Daniel Zaz", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"}
+  ]
+);
+
  //used pexel images for free images
   return (
     <div className="App">
       <div className="flex flex-wrap justify-center"> 
-        <Employee name="Jihun" role="Junior Developer" img="https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"/>
-        <Employee name="Daniel" role={role} img="https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"/>
-        <Employee name="Jihun" role="Junior Developer" img="https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"/>
-        <Employee name="Daniel" role={role} img="https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"/>
-        <Employee name="Jihun" role="Junior Developer" img="https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"/>
-        <Employee name="Daniel" role={role} img="https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"/>
-
+        {employees.map((employee)=>{return <Employee name={employee.name} role={employee.role} img={employee.img} key={uuidv4()}/>})}
       </div>
-
     </div>
   );
 }
