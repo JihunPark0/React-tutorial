@@ -13,17 +13,24 @@ const [role, setRole] = useState('dev');//example of using useState [variable, f
 //useState is an example of a hook
 //there are other hooks that we can use to introduce functionality into our components very easily
 //usually hooks are prefixed with 'use'
+const showEmp = true;
   return (
     <div className="App">
-      <input type='text' onChange={(e)=>{
-        console.log(e.target.value);
-        setRole(e.target.value);
-        }}/>
-      <Employee name="Jihun" role="Junior Developer"/>
-      <Employee name="Daniel" role={role}/>
-      <Employee />
-      <Employee />
-      <Employee />
+      {showEmp ? (
+        <>
+          <input type='text' onChange={(e)=>{
+            console.log(e.target.value);
+            setRole(e.target.value);
+            }}/>
+          <Employee name="Jihun" role="Junior Developer"/>
+          <Employee name="Daniel" role={role}/>
+          <Employee />
+          <Employee />
+          <Employee />
+        </>
+      ) : (
+        <p>You can't see the employees</p>
+      )}
     </div>
   );
 }
