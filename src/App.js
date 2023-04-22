@@ -20,11 +20,11 @@ const [role, setRole] = useState('Developer');//example of using useState [varia
 const [employees, setEmployees] = useState(
   [
     {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
-    {name:"Daniel Zaz", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
+    {name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
     {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
-    {name:"Daniel Zaz", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
+    {name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
     {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
-    {name:"Daniel Zaz", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"}
+    {name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"}
   ]
 );
 
