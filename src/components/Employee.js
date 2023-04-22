@@ -12,7 +12,7 @@ function Employee(props)
                         {props.name}
                         </p>
                         <p className="text-slate-500 font-medium">
-                        {props.role ? <p>{props.role}</p> : <p>no role</p>}
+                        {props.role ? props.role: 'no role'}
                         </p>
                     </div>
                     <EditEmployee />
