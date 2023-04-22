@@ -24,7 +24,7 @@ function EditEmployee(props) {
           <Modal.Title>Update employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <form id="editmodel" class="w-full max-w-sm">
+        <form onSubmit={(e)=>{e.preventDefault(); props.updateEmployee(props.id, name, role);  console.log("hello from editemployee")}} id="editmodel" class="w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
                 <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="name">

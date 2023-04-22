@@ -19,20 +19,31 @@ const [role, setRole] = useState('Developer');//example of using useState [varia
 
 const [employees, setEmployees] = useState(
   [
-    {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
-    {name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
-    {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
-    {name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
-    {name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
-    {name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"}
+    {id: 1,name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
+    {id: 2,name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
+    {id: 3,name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
+    {id: 4,name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"},
+    {id: 5,name: "Jihun Park", role:"Junior Developer", img: "https://images.pexels.com/photos/4556737/pexels-photo-4556737.jpeg"},
+    {id: 6,name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"}
   ]
 );
+
+function updateEmployee(id, newName, newRole){
+  const updatedEmployees = employees.map((employee)=>{
+    if(id === employee.id)
+    {
+      return {...employee, name: newName, role:newRole} //'...employee' this code grabs all the other attribute of the Employee object
+    }
+    return employee;
+  });
+  setEmployees(updatedEmployees);
+}
 
  //used pexel images for free images
   return (
     <div className="App">
       <div className="flex flex-wrap justify-center"> 
-        {employees.map((employee)=>{return <Employee name={employee.name} role={employee.role} img={employee.img} key={uuidv4()}/>})}
+        {employees.map((employee)=>{return <Employee id={employee.id} name={employee.name} role={employee.role} img={employee.img} key={uuidv4()} updateEmployee={updateEmployee}/>})}
       </div>
     </div>
   );
