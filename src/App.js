@@ -1,4 +1,5 @@
 import Employee from './components/Employee';
+import AddEmployee from './components/AddEmployee';
 import './index.css';
 import {useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
@@ -27,7 +28,7 @@ const [employees, setEmployees] = useState(
     {id: 6,name:"Daniel Zas", role:"Developer", img:"https://images.pexels.com/photos/11140270/pexels-photo-11140270.jpeg"}
   ]
 );
-
+//props are not meant to be changed by child components. Thats why we are passing down this callback function which is invoked in the child component
 function updateEmployee(id, newName, newRole){
   const updatedEmployees = employees.map((employee)=>{
     if(id === employee.id)
@@ -38,14 +39,27 @@ function updateEmployee(id, newName, newRole){
   });
   setEmployees(updatedEmployees);
 }
+function newEmployee(name, role, img)
+{
+  let newEmployee = {
+    id: uuidv4,
+    name: name,
+    role: role,
+    img: img
+  }
+  setEmployees([...employees, newEmployee]);
+}
 
  //used pexel images for free images
   return (
-    <div className="App">
-      <div className="flex flex-wrap justify-center"> 
-        {employees.map((employee)=>{return <Employee id={employee.id} name={employee.name} role={employee.role} img={employee.img} key={uuidv4()} updateEmployee={updateEmployee}/>})}
+    <>
+      <div className="App">
+        <div className="flex flex-wrap justify-center"> 
+          {employees.map((employee)=>{return <Employee id={employee.id} name={employee.name} role={employee.role} img={employee.img} key={uuidv4()} updateEmployee={updateEmployee} />})}
+        </div>
       </div>
-    </div>
+      <AddEmployee newEmployee={newEmployee}/>
+    </>
   );
 }
 
