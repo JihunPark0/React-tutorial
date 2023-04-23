@@ -49,13 +49,26 @@ function newEmployee(name, role, img)
   }
   setEmployees([...employees, newEmployee]);
 }
+function deleteEmployee(id)
+{
+  let index;
+  const updatedEmployees = employees.map((employee)=>{
+    if(id === employee.id)
+    {
+      index=employees.indexOf(employee);
+    }
+    return employee;
+  });
+  updatedEmployees.splice(index, 1);
+  setEmployees(updatedEmployees);
+}
 
  //used pexel images for free images
   return (
     <>
       <div className="App">
         <div className="flex flex-wrap justify-center"> 
-          {employees.map((employee)=>{return <Employee id={employee.id} name={employee.name} role={employee.role} img={employee.img} key={uuidv4()} updateEmployee={updateEmployee} />})}
+          {employees.map((employee)=>{return <Employee id={employee.id} name={employee.name} role={employee.role} img={employee.img} key={uuidv4()} updateEmployee={updateEmployee} deleteEmployee={deleteEmployee}/>})}
         </div>
       </div>
       <AddEmployee newEmployee={newEmployee}/>
