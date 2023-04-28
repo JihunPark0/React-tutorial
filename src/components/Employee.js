@@ -15,13 +15,7 @@ function Employee(props) {
               {props.role ? props.role : "no role"}
             </p>
           </div>
-          <EditEmployee
-            id={props.id}
-            name={props.name}
-            role={props.role}
-            updateEmployee={props.updateEmployee}
-            deleteEmployee={props.deleteEmployee}
-          />
+          {props.editEmployee}
         </div>
       </div>
     </>

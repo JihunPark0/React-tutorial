@@ -1,5 +1,6 @@
 import Employee from "./components/Employee";
 import AddEmployee from "./components/AddEmployee";
+import EditEmployee from "./components/EditEmployee";
 import "./index.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -93,6 +94,15 @@ function App() {
       <div className="App">
         <div className="flex flex-wrap justify-center">
           {employees.map((employee) => {
+            const editEmployee = (
+              <EditEmployee
+                id={employee.id}
+                name={employee.name}
+                role={employee.role}
+                updateEmployee={updateEmployee}
+                deleteEmployee={deleteEmployee}
+              />
+            );
             return (
               <Employee
                 id={employee.id}
@@ -102,6 +112,7 @@ function App() {
                 key={uuidv4()}
                 updateEmployee={updateEmployee}
                 deleteEmployee={deleteEmployee}
+                editEmployee={editEmployee}
               />
             );
           })}
