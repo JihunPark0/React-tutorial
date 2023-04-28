@@ -1,4 +1,4 @@
-import EditEmployee from "./EditEmployee";
+//import EditEmployee from "./EditEmployee";
 
 function Employee(props) {
   return (
@@ -7,6 +7,7 @@ function Employee(props) {
         <img
           className="block mx-auto h-24 rounded-full sm:mx-0 sm:shrink-0"
           src={props.img}
+          alt={props.name}
         />
         <div className="text-center space-y-2 sm:text-left">
           <div className="space-y-0.5">
@@ -15,12 +16,7 @@ function Employee(props) {
               {props.role ? props.role : "no role"}
             </p>
           </div>
-          <EditEmployee
-            id={props.id}
-            name={props.name}
-            role={props.role}
-            updateEmployee={props.updateEmployee}
-          />
+          {props.editEmployee}
         </div>
       </div>
     </>

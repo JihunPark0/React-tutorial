@@ -1,5 +1,6 @@
 import Employee from "./components/Employee";
 import AddEmployee from "./components/AddEmployee";
+import EditEmployee from "./components/EditEmployee";
 import "./index.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -10,7 +11,7 @@ function App() {
 
   //states are different to variables
   //Because the state can be tied to the user interface so that when the 'state' changes the user interface will automatically update w/o a page refresh
-  const [role, setRole] = useState("Developer"); //example of using useState [variable, function to set the variable always prefixed with set..]
+  //const [role, setRole] = useState("Developer"); //example of using useState [variable, function to set the variable always prefixed with set..]
   //number one rule of using state: never assign a value to the variable directly
   //YOU ALWAYS GO THROUGH setter
   //HOOK?
@@ -82,6 +83,14 @@ function App() {
       <div className="App">
         <div className="flex flex-wrap justify-center">
           {employees.map((employee) => {
+            const editEmployee = (
+              <EditEmployee
+                id={employee.id}
+                name={employee.name}
+                role={employee.role}
+                updateEmployee={updateEmployee}
+              />
+            );
             return (
               <Employee
                 id={employee.id}
@@ -89,7 +98,7 @@ function App() {
                 role={employee.role}
                 img={employee.img}
                 key={uuidv4()}
-                updateEmployee={updateEmployee}
+                editEmployee={editEmployee}
               />
             );
           })}
