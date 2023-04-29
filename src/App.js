@@ -4,7 +4,7 @@ import EditEmployee from "./components/EditEmployee";
 import "./index.css";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
+import Header from "./components/Header";
 function App() {
   //there are other hooks that we can use to introduce functionality into our components very easily
   //usually hooks are prefixed with 'use'
@@ -80,8 +80,9 @@ function App() {
   //used pexel images for free images
   return (
     <>
-      <div className="App">
-        <div className="flex flex-wrap justify-center">
+      <div className="App bg-gray-300 min-h-screen">
+        <Header />
+        <div className="flex flex-wrap justify-center my-2">
           {employees.map((employee) => {
             const editEmployee = (
               <EditEmployee
