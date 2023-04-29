@@ -104,8 +104,8 @@ function App() {
             );
           })}
         </div>
+        <AddEmployee newEmployee={newEmployee} />
       </div>
-      <AddEmployee newEmployee={newEmployee} />
     </>
   );
 }
