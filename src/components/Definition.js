@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 export default function Definition() {
   const [word, setWord] = useState();
+  let { search } = useParams();
 
   useEffect(() => {
-    fetch("https://api.dictionaryapi.dev/api/v2/entries/en/halo")
+    fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + search)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data[0].meanings);
         setWord(data[0].meanings);
       });
     //requesting from an api using fetch
