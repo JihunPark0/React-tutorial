@@ -11,7 +11,11 @@ export default function Dictionary() {
           setWord(e.target.value);
         }}
       />
-      <button onClick={() => navigate("/definition/" + word)}>search</button>
+      <button
+        onClick={() => navigate("/definition/" + word, { replace: true })}
+      >
+        search
+      </button>
     </>
   );
 }

@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Customers from "./pages/Customers";
 import Dictionary from "./pages/Dictionary";
 import Definition from "./components/Definition";
+import NotFound from "./components/NotFound";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,8 @@ function App() {
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/definition/:search" element={<Definition />} />
           {/*:search is a URL parameter which can be accessed from Definition component using 'useParams hook'*/}
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Header>
     </BrowserRouter>

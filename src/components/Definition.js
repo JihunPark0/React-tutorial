@@ -1,13 +1,21 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate, Link } from "react-router-dom";
+import NotFound from "./NotFound";
 export default function Definition() {
   const [word, setWord] = useState();
+  const [notFound, setNotFound] = useState(false);
   let { search } = useParams();
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + search)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 404) {
+          setNotFound(true);
+        }
+        return response.json();
+      })
       .then((data) => {
         setWord(data[0].meanings);
       });
@@ -20,20 +28,29 @@ export default function Definition() {
 
     //When using an api that doesn't require a key, its fine to use it in the front end as everyone else can use this api
   }, []);
-
+  if (notFound == true) {
+    return (
+      <>
+        <NotFound />
+        <Link to="/dictionary">Search another</Link>
+      </>
+    );
+  }
   return (
     <>
-      <h1>Here is a definition:</h1>
-      {word
-        ? word.map((meaning) => {
+      {word ? (
+        <>
+          <h1>Here is a definition:</h1>
+          {word.map((meaning) => {
             return (
               <p key={uuidv4()}>
                 {meaning.partOfSpeech + ": "}
                 {meaning.definitions[0].definition}
               </p>
             );
-          })
-        : null}
+          })}
+        </>
+      ) : null}
     </>
   );
 }
