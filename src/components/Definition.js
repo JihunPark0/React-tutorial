@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate, Link } from "react-router-dom";
 import NotFound from "./NotFound";
+import DefinitionSearch from "./DefinitionsSearch";
 export default function Definition() {
   const [word, setWord] = useState();
   const [notFound, setNotFound] = useState(false);
@@ -77,6 +78,8 @@ export default function Definition() {
               </p>
             );
           })}
+          <p>Search again</p>
+          <DefinitionSearch />
         </>
       ) : null}
     </>

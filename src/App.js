@@ -14,7 +14,7 @@ function App() {
           <Route path="/employees" element={<Employees />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/dictionary" element={<Dictionary />} />
-          <Route path="/definition/:search" element={<Definition />} />
+          <Route path="/dictionary/:search" element={<Definition />} />
           {/*:search is a URL parameter which can be accessed from Definition component using 'useParams hook'*/}
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
