@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 export default function Customer() {
   const [customers, setCustomers] = useState();
   useEffect(() => {
@@ -12,10 +13,16 @@ export default function Customer() {
   }, []);
   return (
     <>
-      <h1 className="w-96 bg-white shadow rounded">Here are our customers: </h1>
+      <h1 className="py-2 text-center mx-auto w-96 shadow rounded">
+        Here are our customers:{" "}
+      </h1>
       {customers
         ? customers.map((customer) => {
-            return <p>{customer.name}</p>;
+            return (
+              <p className="py-2 text-center mx-auto w-96 shadow rounded">
+                <Link to={"/customers/" + customer.id}>{customer.name}</Link>
+              </p>
+            );
           })
         : null}
     </>
