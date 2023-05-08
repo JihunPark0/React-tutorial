@@ -7,7 +7,6 @@ export default function Customer() {
     fetch("http://127.0.0.1:8000/api/customers/")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setCustomers(data.customers);
       });
   }, []);

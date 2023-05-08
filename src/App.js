@@ -6,6 +6,7 @@ import Customers from "./pages/Customers";
 import Dictionary from "./pages/Dictionary";
 import Definition from "./components/Definition";
 import NotFound from "./components/NotFound";
+import Customer from "./pages/Customer";
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/employees" element={<Employees />} />
           <Route path="/customers" element={<Customers />} />
+          <Route path="/customers/:id" element={<Customer />} />
           <Route path="/dictionary" element={<Dictionary />} />
           <Route path="/dictionary/:search" element={<Definition />} />
           {/*:search is a URL parameter which can be accessed from Definition component using 'useParams hook'*/}
