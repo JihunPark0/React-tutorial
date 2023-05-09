@@ -40,6 +40,8 @@ export default function Customer() {
       .then((data) => {
         //assume the add was successful
         //hide the modal
+        console.log(data);
+        setCustomers([...customers, data.customer]);
         toggleShow();
         //make sure the list is updated
       })
