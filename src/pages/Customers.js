@@ -21,15 +21,17 @@ export default function Customer() {
       <h1 className="py-2 text-center mx-auto w-96 shadow rounded">
         Here are our customers:{" "}
       </h1>
-      {customers
-        ? customers.map((customer) => {
-            return (
-              <p className="py-2 text-center mx-auto w-96 shadow rounded">
-                <Link to={"/customers/" + customer.id}>{customer.name}</Link>
-              </p>
-            );
-          })
-        : null}
+      <ul>
+        {customers
+          ? customers.map((customer) => {
+              return (
+                <li key={customer.id}>
+                  <Link to={"/customers/" + customer.id}>{customer.name}</Link>
+                </li>
+              );
+            })
+          : null}
+      </ul>
     </>
   );
 }

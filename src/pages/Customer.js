@@ -8,7 +8,6 @@ export default function Customer() {
   const [customer, setCustomer] = useState();
   const navigate = useNavigate();
   const [notFound, setNotfound] = useState();
-
   const url = baseUrl + "/api/customers/" + id;
   useEffect(() => {
     fetch(url)
@@ -26,6 +25,7 @@ export default function Customer() {
         setCustomer(data.customer);
       });
   }, []);
+
   return (
     <>
       {notFound ? <NotFound id={id} /> : null}
@@ -36,6 +36,28 @@ export default function Customer() {
           <p>{customer.industry}</p>
         </div>
       ) : null}
+      <button
+        onClick={(e) => {
+          const url = baseUrl + "/api/customers/" + id;
+          fetch(url, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Something went wrong");
+              }
+              //assume things went well
+              navigate("/customers");
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        }}
+      >
+        Delete
+      </button>
+      <br />
       <Link to="/customers">Go back to customers</Link>
     </>
   );
