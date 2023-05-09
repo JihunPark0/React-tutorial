@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../shared";
+import AddCustomer from "../components/AddCustomer";
 export default function Customer() {
   const [customers, setCustomers] = useState();
   useEffect(() => {
@@ -16,6 +17,27 @@ export default function Customer() {
         setCustomers(data.customers);
       });
   }, []);
+  function newCustomer(name, industry) {
+    const data = { name: name, industry: industry };
+    const url = baseUrl + "/api/customers/";
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        //assume the add was successful
+        //hide the modal
+        //make sure the list is updated
+      })
+      .catch((e) => console.log(e));
+  }
   return (
     <>
       <h1 className="py-2 text-center mx-auto w-96 shadow rounded">
@@ -32,6 +54,7 @@ export default function Customer() {
             })
           : null}
       </ul>
+      <AddCustomer newCustomer={newCustomer} />
     </>
   );
 }
