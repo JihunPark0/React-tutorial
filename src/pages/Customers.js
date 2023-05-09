@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../shared";
 export default function Customer() {
   const [customers, setCustomers] = useState();
   useEffect(() => {
-    console.log("fetching");
-    fetch("http://127.0.0.1:8000/api/customers/")
-      .then((response) => response.json())
+    fetch(baseUrl + "/api/customers/")
+      .then((response) => {
+        if (response.status === 404) {
+          //redirect to a 404 page
+          //render a 404 component in this page
+        }
+        return response.json();
+      })
       .then((data) => {
         setCustomers(data.customers);
       });
