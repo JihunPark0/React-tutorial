@@ -9,15 +9,16 @@ export default function Customer() {
   const [customer, setCustomer] = useState();
   const [tempCustomer, setTempCustomer] = useState();
   const [changed, setChanged] = useState(false);
+  const [error, setError] = useState();
 
   const navigate = useNavigate();
   const [notFound, setNotfound] = useState();
   const url = baseUrl + "/api/customers/" + id;
 
   useEffect(() => {
-    console.log("customer: ", customer);
-    console.log("tempCustomer: ", tempCustomer);
-    console.log(changed);
+    // console.log("customer: ", customer);
+    // console.log("tempCustomer: ", tempCustomer);
+    // console.log(changed);
   });
 
   useEffect(() => {
@@ -30,11 +31,19 @@ export default function Customer() {
           // render a 404 component in this page
           setNotfound(true);
         }
+        if (!response.ok) {
+          console.log(response);
+          //catch all for errors that are not 200 through to 299
+          throw new Error("Something went wrong, try again later");
+        }
         return response.json();
       })
       .then((data) => {
         setCustomer(data.customer);
         setTempCustomer(data.customer);
+      })
+      .catch((e) => {
+        setError(e.message);
       });
   }, []);
   function updateCustomer() {
@@ -45,6 +54,8 @@ export default function Customer() {
       body: JSON.stringify(tempCustomer),
     })
       .then((response) => {
+        //console.log(response);
+        if (!response.ok) throw new Error("Something went wrong");
         return response.json();
       })
       .then((data) => {
@@ -53,11 +64,30 @@ export default function Customer() {
         setCustomer(data.customer);
         //to allow persistent layer is reflected on the state variable
         setChanged(false);
-        console.log(data);
+        setError(undefined);
       })
-      .catch(() => {});
+      .catch((e) => {
+        setError(e.message);
+      });
   }
 
+  function handleDelete() {
+    const url = baseUrl + "/api/customers/" + id;
+    fetch(url, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+        //assume things went well
+        navigate("/customers");
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
+  }
   return (
     <>
       {notFound ? <NotFound id={id} /> : null}
@@ -94,30 +124,11 @@ export default function Customer() {
               <button onClick={updateCustomer}>Save</button>
             </>
           ) : null}
+
+          <button onClick={handleDelete}>Delete</button>
         </div>
       ) : null}
-      <button
-        onClick={(e) => {
-          const url = baseUrl + "/api/customers/" + id;
-          fetch(url, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Something went wrong");
-              }
-              //assume things went well
-              navigate("/customers");
-            })
-            .catch((e) => {
-              console.log(e);
-            });
-        }}
-      >
-        Delete
-      </button>
-      <br />
+      {error ? <p>{error}</p> : null}
       <Link to="/customers">Go back to customers</Link>
     </>
   );
