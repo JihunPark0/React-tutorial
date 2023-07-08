@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import NotFound from "./NotFound";
 import DefinitionSearch from "./DefinitionsSearch";
 export default function Definition() {
   const [word, setWord] = useState();
   const [notFound, setNotFound] = useState(false);
   const [error, setError] = useState(false);
+
   let { search } = useParams();
-  const navigate = useNavigate();
+
   //errors->Web Request
   //HTTP status code
   //400-499 client error responses (404-not found)
@@ -24,7 +25,6 @@ export default function Definition() {
         if (response.status === 404) {
           setNotFound(true);
         } else if (response.status === 401) {
-          navigate("/login");
         } else if (response.status === 500) {
           //setServerError(true);
         }
