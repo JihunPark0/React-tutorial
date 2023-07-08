@@ -11,7 +11,13 @@ export default function Customer() {
   }
 
   useEffect(() => {
-    fetch(baseUrl + "/api/customers/")
+    const url = baseUrl + "/api/customers/";
+    fetch(url, {
+      headers: {
+        "Content-Type": "applications/json",
+        Authorization: "Bearer " + localStorage.getItem("access"),
+      },
+    })
       .then((response) => {
         if (response.status === 404) {
           //redirect to a 404 page
@@ -31,7 +37,10 @@ export default function Customer() {
     const url = baseUrl + "/api/customers/";
     fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("access"),
+      },
       body: JSON.stringify(data),
     })
       .then((response) => {
@@ -43,7 +52,7 @@ export default function Customer() {
       .then((data) => {
         //assume the add was successful
         //hide the modal
-        console.log(data);
+
         setCustomers([...customers, data.customer]);
         toggleShow();
         //make sure the list is updated

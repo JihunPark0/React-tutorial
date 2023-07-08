@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { baseUrl } from "../shared";
 export default function Login() {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   function login(e) {
     e.preventDefault();
     const url = baseUrl + "/api/token/";
@@ -17,13 +17,17 @@ export default function Login() {
       }),
     })
       .then((response) => {
-        return response.json;
+        return response.json();
       })
       .then((data) => {
-        console.log(data);
+        //One of the most important concepts in web dev: Local storage↓
+        localStorage.setItem("access", data.access);
+        localStorage.setItem("refresh", data.refresh);
+        console.log(localStorage);
       })
       .catch();
   }
+
   return (
     <form className="ml-2 w-full max-w-sm" id="login" onSubmit={login}>
       <div className="md:flex md:items-center mb-6">
