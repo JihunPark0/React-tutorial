@@ -30,6 +30,8 @@ export default function Customer() {
           //or
           // render a 404 component in this page
           setNotfound(true);
+        } else if (response.status === 401) {
+          navigate("/login");
         }
         if (!response.ok) {
           console.log(response);
@@ -46,7 +48,8 @@ export default function Customer() {
         setError(e.message);
       });
   }, []);
-  function updateCustomer() {
+  function updateCustomer(e) {
+    e.preventDefault();
     const url = baseUrl + "/api/customers/" + id;
     fetch(url, {
       method: "POST",
@@ -91,45 +94,94 @@ export default function Customer() {
   return (
     <>
       {notFound ? <NotFound id={id} /> : null}
-      {customer ? (
-        <div>
-          <input
-            className="block m-2 px-2"
-            type="text"
-            value={tempCustomer.name}
-            onChange={(e) => {
-              setTempCustomer({ ...tempCustomer, name: e.target.value });
-              setChanged(true);
-            }}
-          />
-          <input
-            className="block m-2 px-2"
-            type="text"
-            value={tempCustomer.industry}
-            onChange={(e) => {
-              setTempCustomer({ ...tempCustomer, industry: e.target.value });
-              setChanged(true);
-            }}
-          />
-          {changed ? (
-            <>
-              <button
-                onClick={() => {
-                  setTempCustomer({ ...customer });
-                  setChanged(false);
-                }}
-              >
-                Cancel
-              </button>
-              <button onClick={updateCustomer}>Save</button>
-            </>
-          ) : null}
+      <div className="p-3">
+        {customer ? (
+          <div>
+            <form
+              className="w-full max-w-sm"
+              id="customer"
+              onSubmit={updateCustomer}
+            >
+              <div class="md:flex md:items-center mb-6">
+                <div class="md:w-1/4">
+                  <label for="name">Name</label>
+                </div>
 
-          <button onClick={handleDelete}>Delete</button>
-        </div>
-      ) : null}
-      {error ? <p>{error}</p> : null}
-      <Link to="/customers">Go back to customers</Link>
+                <div class="md:w-3/4">
+                  <input
+                    id="name"
+                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    type="text"
+                    value={tempCustomer.name}
+                    onChange={(e) => {
+                      setTempCustomer({
+                        ...tempCustomer,
+                        name: e.target.value,
+                      });
+                      setChanged(true);
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div class="md:flex md:items-center mb-6">
+                <div class="md:w-1/4">
+                  <label for="industry">Industry</label>
+                </div>
+
+                <div class="md:w-3/4">
+                  <input
+                    id="industry"
+                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                    type="text"
+                    value={tempCustomer.industry}
+                    onChange={(e) => {
+                      setTempCustomer({
+                        ...tempCustomer,
+                        industry: e.target.value,
+                      });
+                      setChanged(true);
+                    }}
+                  />
+                </div>
+              </div>
+            </form>
+            {changed ? (
+              <div className="mb-2">
+                <button
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mr-2"
+                  onClick={() => {
+                    setTempCustomer({ ...customer });
+                    setChanged(false);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+                  form="customer"
+                >
+                  Save
+                </button>
+              </div>
+            ) : null}
+            <div>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleDelete}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ) : null}
+        {error ? <p>{error}</p> : null}
+        <Link to="/customers">
+          <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded no-underline mt-5">
+            ← Go back
+          </button>
+        </Link>
+      </div>
     </>
   );
 }
