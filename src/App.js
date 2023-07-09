@@ -1,4 +1,5 @@
 import "./index.css";
+import { createContext, useState } from "react";
 import Header from "./components/Header";
 import Employees from "./pages/Employees";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -8,23 +9,29 @@ import Definition from "./components/Definition";
 import NotFound from "./components/NotFound";
 import Customer from "./pages/Customer";
 import Login from "./pages/Login";
+
+export const LoginContext = createContext();
+
 function App() {
+  const [loggedIn, setLoggedIn] = useState(true);
   return (
-    <BrowserRouter>
-      <Header>
-        <Routes>
-          <Route path="/employees" element={<Employees />} />
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/customers/:id" element={<Customer />} />
-          <Route path="/dictionary" element={<Dictionary />} />
-          <Route path="/dictionary/:search" element={<Definition />} />
-          <Route path="/login" element={<Login />} />
-          {/*:search is a URL parameter which can be accessed from Definition component using 'useParams hook'*/}
-          <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Header>
-    </BrowserRouter>
+    <LoginContext.Provider value={loggedIn}>
+      <BrowserRouter>
+        <Header>
+          <Routes>
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/customers/:id" element={<Customer />} />
+            <Route path="/dictionary" element={<Dictionary />} />
+            <Route path="/dictionary/:search" element={<Definition />} />
+            <Route path="/login" element={<Login />} />
+            {/*:search is a URL parameter which can be accessed from Definition component using 'useParams hook'*/}
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Header>
+      </BrowserRouter>
+    </LoginContext.Provider>
   );
 }
 
