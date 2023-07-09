@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { baseUrl } from "../shared";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { LoginContext } from "../App";
 export default function Login() {
+  const [loggedIn, setLoggedIn] = useContext(LoginContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ export default function Login() {
         console.log(location);
         console.log(location.state);
         console.log(location?.state?.previousUrl); // question mark for conditional chaining
+        setLoggedIn(true);
         navigate(
           location?.state?.previousUrl
             ? location.state.previousUrl
