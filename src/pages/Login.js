@@ -8,7 +8,7 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function login(e) {
+  function handleLogin(e) {
     e.preventDefault();
     const url = baseUrl + "/api/token/";
     fetch(url, {
@@ -41,7 +41,7 @@ export default function Login() {
   }
 
   return (
-    <form className="ml-2 w-full max-w-sm" id="login" onSubmit={login}>
+    <form className="ml-2 w-full max-w-sm" id="login" onSubmit={handleLogin}>
       <div className="md:flex md:items-center mb-6">
         <div className="md:w-1/4">
           <label htmlFor="userName">Username</label>
