@@ -8,7 +8,8 @@ Completed:
 5. Also used JWT authentication
 6. Log In using fetch().then().then()
 7. Employees page\
-   ToDo:
+
+ToDo:
 
 8. Handle edge cases for register page
 9. Email verification
