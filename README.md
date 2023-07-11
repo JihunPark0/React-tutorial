@@ -7,7 +7,7 @@ Completed:
    a boolean value whether a user is signed in or not\
 5. Also used JWT authentication
 6. Log In using fetch().then().then()
-7. Employees page
+7. Employees page\
    ToDo:
 
 8. Handle edge cases for register page
