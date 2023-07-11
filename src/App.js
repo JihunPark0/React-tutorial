@@ -10,6 +10,7 @@ import NotFound from "./components/NotFound";
 import Customer from "./pages/Customer";
 import Login from "./pages/Login";
 import { baseUrl } from "./shared";
+import Register from "./pages/Register";
 
 export const LoginContext = createContext();
 
@@ -62,6 +63,7 @@ function App() {
             <Route path="/customers/:id" element={<Customer />} />
             <Route path="/dictionary" element={<Dictionary />} />
             <Route path="/dictionary/:search" element={<Definition />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             {/*:search is a URL parameter which can be accessed from Definition component using 'useParams hook'*/}
             <Route path="/404" element={<NotFound />} />
