@@ -1,7 +1,7 @@
 Completed:
 
-1. Customer page,
-2. List of customer page,
+1. USER SYSTEM
+2. Customer page, List of customer page,
 3. Checking whether user is already signed in or not using
 4. createContext and useContext for loginContext which will return\
    a boolean value whether a user is signed in or not\
@@ -9,7 +9,7 @@ Completed:
 6. Log In using fetch().then().then()
 7. Employees page\
 
-ToDo:
+ToDo for :
 
 8. Handle edge cases for register page
 9. Email verification
