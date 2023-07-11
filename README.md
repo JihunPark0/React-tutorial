@@ -1,3 +1,19 @@
+Completed:\
+Customer page, \
+ List of customer page,\
+ Checking whether user is already signed in or not using\
+ createContext and useContext for loginContext which will return\
+ a boolean value whether a user is signed in or not\
+ Also used JWT authentication
+Log In using fetch().then().then()\
+ Employees page\
+ToDo:\
+
+1.  Handle edge cases for register page
+2.  Email verification
+3.  User Accounts page
+4.  Customising display depending on who is logged in
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
