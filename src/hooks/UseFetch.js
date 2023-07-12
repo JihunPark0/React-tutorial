@@ -30,10 +30,12 @@ export default function useFetch(url, { method, headers, body } = {}) {
       })
       .then((data) => {
         setData(data);
+        console.log(data);
       })
       .catch((e) => {
         setErrorStatus(e);
       });
   }, []);
+
   return { data, errorStatus }; // short hand of doing this: return { data: data, errorStatus: errorStatus };
 }
