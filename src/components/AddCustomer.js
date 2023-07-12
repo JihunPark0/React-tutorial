@@ -21,7 +21,7 @@ function AddCustomer(props) {
 
       <Modal
         show={props.show}
-        onHide={handleClose}
+        onHide={() => props.toggleShow()}
         backdrop="static"
         keyboard={false}
       >

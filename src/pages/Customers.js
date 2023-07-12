@@ -3,16 +3,30 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { baseUrl } from "../shared";
 import { LoginContext } from "../App";
 import AddCustomer from "../components/AddCustomer";
+import useFetch from "../hooks/UseFetch";
+
 export default function Customer() {
   const [loggedIn, setLoggedIn] = useContext(LoginContext);
-  const [customers, setCustomers] = useState();
+  //const [customers, setCustomers] = useState();
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   function toggleShow() {
     setShow(!show);
   }
+  const url = baseUrl + "/api/customers/";
+  const { data, errorStatus } = useFetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "applications/json",
+      Authorization: "Bearer " + localStorage.getItem("access"),
+    },
+  });
 
+  useEffect(() => {
+    console.log(data, errorStatus);
+  });
+  /*
   useEffect(() => {
     const url = baseUrl + "/api/customers/";
     fetch(url, {
@@ -40,7 +54,11 @@ export default function Customer() {
         setCustomers(data.customers);
       });
   }, []);
+
+*/
+
   function newCustomer(name, industry) {
+    /*
     const data = { name: name, industry: industry };
     const url = baseUrl + "/api/customers/";
     fetch(url, {
@@ -66,15 +84,17 @@ export default function Customer() {
         //make sure the list is updated
       })
       .catch((e) => console.log(e));
+      */
   }
+
   return (
     <>
       <h1 className="py-2 text-center mx-auto w-96 shadow rounded">
         Here are our customers:{" "}
       </h1>
 
-      {customers
-        ? customers.map((customer) => {
+      {data?.customers //optional chaining so you don't try to access customer property on undefined.
+        ? data.customers.map((customer) => {
             return (
               <div className="m-2">
                 <Link to={"/customers/" + customer.id}>
