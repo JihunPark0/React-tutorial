@@ -1,7 +1,8 @@
 //custom hook to reduce lines of repeated code
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-export default function useFetch(url, { method, headers, body }) {
+export default function useFetch(url, { method, headers, body } = {}) {
+  //assign a default empty object if object is not passed in
   const [data, setData] = useState();
   const [errorStatus, setErrorStatus] = useState();
 

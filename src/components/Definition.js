@@ -14,7 +14,7 @@ export default function Definition() {
 
   let { search } = useParams();
   const url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + search;
-  const [word, errorStatus] = useFetch(url);
+  const { data: word, errorStatus } = useFetch(url);
 
   if (errorStatus === 404) {
     return (
