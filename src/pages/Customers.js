@@ -16,83 +16,34 @@ export default function Customer() {
   }
   const url = baseUrl + "/api/customers/";
   const {
+    request,
+    appendData,
     data: { customers } = {},
     //this is done to grab customers propery from data object.
     //Also, had to handle issue of grabbing customers property
     //from data object, data may be undefined until useFetch completes
     //the function. Handled by setting a default value until data object is not undefined
-
     errorStatus,
   } = useFetch(url, {
     method: "GET",
     headers: {
-      "Content-Type": "applications/json",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + localStorage.getItem("access"),
     },
   });
 
   useEffect(() => {
-    console.log(customers, errorStatus);
-  });
-  /*
-  useEffect(() => {
-    const url = baseUrl + "/api/customers/";
-    fetch(url, {
-      headers: {
-        "Content-Type": "applications/json",
-        Authorization: "Bearer " + localStorage.getItem("access"),
-      },
-    })
-      .then((response) => {
-        if (response.status === 404) {
-          //redirect to a 404 page
-          //render a 404 component in this page
-        }
-        if (response.status === 401) {
-          setLoggedIn(false);
-          navigate("/login", {
-            state: {
-              previousUrl: location.pathname,
-            },
-          });
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCustomers(data.customers);
-      });
+    request();
   }, []);
 
-*/
+  useEffect(() => {
+    //FOR DEBUGGIN
+    //console.log(request, appendData, customers, errorStatus);
+  });
 
   function newCustomer(name, industry) {
-    /*
-    const data = { name: name, industry: industry };
-    const url = baseUrl + "/api/customers/";
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("access"),
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Something went wrong");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        //assume the add was successful
-        //hide the modal
-
-        setCustomers([...customers, data.customer]);
-        toggleShow();
-        //make sure the list is updated
-      })
-      .catch((e) => console.log(e));
-      */
+    appendData({ name: name, industry: industry });
+    if (!errorStatus) toggleShow();
   }
 
   return (

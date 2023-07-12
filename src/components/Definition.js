@@ -14,13 +14,19 @@ export default function Definition() {
 
   let { search } = useParams();
   const url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + search;
-  const { data: [{ meanings: word }] = [{}], errorStatus } = useFetch(url, {
+  const {
+    request,
+    data: [{ meanings: word }] = [{}],
+    errorStatus,
+  } = useFetch(url, {
     //[{ meanings: word }] = [{}] destructured into first array item and into word property
     //checkout https://stackoverflow.com/questions/39262529/nested-object-and-array-destructuring
     method: "GET",
   });
 
-  useEffect(() => {});
+  useEffect(() => {
+    request();
+  }, []);
 
   if (errorStatus === 404) {
     return (
