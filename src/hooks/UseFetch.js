@@ -1,8 +1,11 @@
 //custom hook to reduce lines of repeated code
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { LoginContext } from "../App";
+import { useContext } from "react";
 export default function useFetch(url, { method, headers, body } = {}) {
   //assign a default empty object if object is not passed in
+  const [loggedIn, changeLoggedIn] = useContext(LoginContext);
   const [data, setData] = useState();
   const [errorStatus, setErrorStatus] = useState();
 
@@ -17,6 +20,7 @@ export default function useFetch(url, { method, headers, body } = {}) {
     })
       .then((response) => {
         if (response.status === 401) {
+          changeLoggedIn();
           navigate("/login", {
             state: {
               previousUrl: location.pathname,
@@ -44,6 +48,7 @@ export default function useFetch(url, { method, headers, body } = {}) {
     })
       .then((response) => {
         if (response.status === 401) {
+          changeLoggedIn();
           navigate("/login", {
             state: {
               previousUrl: location.pathname,
