@@ -15,7 +15,15 @@ export default function Customer() {
     setShow(!show);
   }
   const url = baseUrl + "/api/customers/";
-  const { data, errorStatus } = useFetch(url, {
+  const {
+    data: { customers } = {},
+    //this is done to grab customers propery from data object.
+    //Also, had to handle issue of grabbing customers property
+    //from data object, data may be undefined until useFetch completes
+    //the function. Handled by setting a default value until data object is not undefined
+
+    errorStatus,
+  } = useFetch(url, {
     method: "GET",
     headers: {
       "Content-Type": "applications/json",
@@ -24,7 +32,7 @@ export default function Customer() {
   });
 
   useEffect(() => {
-    console.log(data, errorStatus);
+    console.log(customers, errorStatus);
   });
   /*
   useEffect(() => {
@@ -93,8 +101,8 @@ export default function Customer() {
         Here are our customers:{" "}
       </h1>
 
-      {data?.customers //optional chaining so you don't try to access customer property on undefined.
-        ? data.customers.map((customer) => {
+      {customers //optional chaining so you don't try to access customer property on undefined.
+        ? customers.map((customer) => {
             return (
               <div className="m-2">
                 <Link to={"/customers/" + customer.id}>
