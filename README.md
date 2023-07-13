@@ -11,7 +11,7 @@ React JS tutorial provided by [Caleb Curry](https://www.youtube.com/watch?v=x_x5
 
 Through learning the react-framework, I significantly improved both my understanding of JavaScript and my proficiency in writing code using it.
 
-Some of the learning includes:
+What I've learnt so far:
 - [x] Basic React File structures and the use of JSX
 - [x] The use of render props and passing functions to children components
 - [x] Use of useState Hooks
