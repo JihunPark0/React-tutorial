@@ -2,12 +2,11 @@ Completed:
 
 1. USER SYSTEM
 2. Customer page, List of customer page,
-3. Checking whether user is already signed in or not using
-4. createContext and useContext for loginContext which will return\
-   a boolean value whether a user is signed in or not\
+
+   a boolean value whether a user is signed in or not
 5. Also used JWT authentication
 6. Log In using fetch().then().then()
-7. Employees page\
+7. Employees page
 
 ToDo for :
 
