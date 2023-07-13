@@ -1,7 +1,7 @@
 
 # React JS Notes
 
-React JS tutorial(Provided by Caleb Curry)
+React JS tutorial provided by [Caleb Curry](https://www.youtube.com/watch?v=x_x5LkW6IXs&list=PL_c9BZzLwBRKFRIBWEWYCnV4Lk9HE3eYJ)
 
 ## Tech Stack
 
